@@ -1,0 +1,110 @@
+task1 
+
+
+initialized the aws cli with the iam user
+
+task2: Code:
+wrote the code
+terraform plan
+terraform apply
+
+task2: Output
+"""
+Plan: 9 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_vpc.devops_assignment: Creating...
+aws_vpc.devops_assignment: Still creating... [10s elapsed]
+aws_vpc.devops_assignment: Creation complete after 16s [id=vpc-0b4e1455dc53707a1]
+aws_internet_gateway.devops_igw: Creating...
+aws_subnet.private_subnet_2: Creating...
+aws_subnet.private_subnet_1: Creating...
+aws_subnet.public_subnet_2: Creating...
+aws_subnet.public_subnet_1: Creating...
+aws_subnet.private_subnet_1: Creation complete after 4s [id=subnet-03f8a99ad694bf69c]
+aws_subnet.private_subnet_2: Creation complete after 4s [id=subnet-0dff400f5ef8b589f]
+aws_subnet.public_subnet_1: Creation complete after 6s [id=subnet-0bb91ffaf3f387a1f]
+aws_internet_gateway.devops_igw: Creation complete after 7s [id=igw-0bb24b1b36d51ee89]
+aws_route_table.private_route_table: Creating...
+aws_subnet.public_subnet_2: Creation complete after 7s [id=subnet-06983d57deddf2e6f]
+aws_route_table.private_route_table: Creation complete after 5s [id=rtb-088b182d5fe06ad17]
+aws_route_table_association.private_subnet_association_2: Creating...
+aws_route_table_association.private_subnet_association_1: Creating...
+aws_route_table_association.private_subnet_association_1: Creation complete after 2s [id=rtbassoc-0c1c1298edab24c2a]
+aws_route_table_association.private_subnet_association_2: Creation complete after 2s [id=rtbassoc-0aeabc8fbf4e1d381]
+
+vpc_id = "vpc-0b4e1455dc53707a1"
+Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
+"""
+
+
+Task3: Code
+wrote the code 
+terraform init
+terraform plan
+terraform apply
+
+subtask: create keys
+sudo ssh-keygen
+ 
+
+Task3: Output:
+"""
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_security_group.ec2_security_group: Creating...
+aws_security_group.ec2_security_group: Still creating... [10s elapsed]
+aws_security_group.ec2_security_group: Still creating... [20s elapsed]
+aws_security_group.ec2_security_group: Creation complete after 29s [id=sg-0e297da5468ad74fe]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+"""
+
+Task4+5: Code
+wrote the code 
+terraform init
+terraform plan -var 'private_key_path=../public_priv_keys/cs423-assignment4-key' -var 'subnet_id_web=subnet-0bb91ffaf3f387a1f' -var 'subnet_id_db_ml=subnet-06983d57deddf2e6f'
+terraform apply -var 'private_key_path=../public_priv_keys/cs423-assignment4-key' -var 'subnet_id_web=subnet-0bb91ffaf3f387a1f' -var 'subnet_id_db_ml=subnet-06983d57deddf2e6f'
+
+Task4+5: Output:
+"""
+aws_key_pair.ec2_key_pair: Creating...
+aws_key_pair.ec2_key_pair: Creation complete after 2s [id=cs423-assignment4-key]
+aws_instance.ec2_instance_web: Creating...
+aws_instance.ec2_instance_db_ml: Creating...
+aws_instance.ec2_instance_web: Still creating... [10s elapsed]
+aws_instance.ec2_instance_db_ml: Still creating... [10s elapsed]
+aws_instance.ec2_instance_db_ml: Still creating... [20s elapsed]
+aws_instance.ec2_instance_web: Still creating... [20s elapsed]
+aws_instance.ec2_instance_db_ml: Creation complete after 30s [id=i-060140781e4b5f677]
+aws_instance.ec2_instance_web: Still creating... [30s elapsed]
+aws_instance.ec2_instance_web: Creation complete after 38s [id=i-09ad7591e1d313581]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+db_ml_instance_ips = {
+  "private_ip" = "10.0.3.185"
+  "public_ip" = "35.92.45.214"
+}
+iam_user_details = {
+  "user_name" = "your_iam_username"
+}
+private_key = "cs423-assignment4-key"
+web_instance_ips = {
+  "private_ip" = "10.0.1.141"
+  "public_ip" = "34.221.81.36"
+}
+"""
